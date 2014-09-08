@@ -1,6 +1,6 @@
 #!/bin/bash
 
-KUBE=~/src/kuberbetes/cluster/kubecfg.sh
+KUBE=~/src/kubernetes/cluster/kubecfg.sh
 
-$KUBE -c jug/jug.json create replicationControllers
+$KUBE -c jug.json create replicationControllers
 $KUBE list pods

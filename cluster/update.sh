@@ -1,5 +1,5 @@
 #!/bin/bash
 
-KUBE=~/src/kuberbetes/cluster/kubecfg.sh
+KUBE=~/src/kubernetes/cluster/kubecfg.sh
 
-$KUBE -image dgageot/jug -u 5s rollingupdate jug
+$KUBE -image dgageot/jug:red -u 5s rollingupdate jug
