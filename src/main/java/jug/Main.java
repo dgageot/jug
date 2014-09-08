@@ -1,15 +1,20 @@
 package jug;
 
-import com.github.jknack.handlebars.ValueResolver;
 import net.codestory.http.WebServer;
 import net.codestory.http.templating.ModelAndView;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.util.Map;
-import java.util.Set;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 public class Main {
+  private final Logs logs;
+  private final Executor executor;
+
+  public Main() {
+    this.logs = new Logs();
+    this.executor = Executors.newSingleThreadExecutor();
+  }
+
   public static void main(String[] args) {
     new Main().start();
   }
@@ -18,43 +23,19 @@ public class Main {
     new WebServer(routes -> routes
         .addHandleBarsResolver(new HostResolver())
         .get("/color/blue", () -> {
-          blue();
+          log("blue");
           return ModelAndView.of("pass");
         })
         .get("/color/yellow", () -> {
-          yellow();
+          log("yellow");
           return ModelAndView.of("die");
         })
     ).start();
   }
 
-  private void blue() {
-    System.out.println("BLUE");
-  }
+  private void log(String color) {
+    System.out.println(color);
 
-  private void yellow() {
-    System.out.println("YELLOW");
-  }
-
-  static class HostResolver implements ValueResolver {
-    private final String hostname = hostname();
-
-    @Override
-    public Object resolve(Object context, String name) {
-      return "host".equals(name) ? hostname : null;
-    }
-
-    @Override
-    public Set<Map.Entry<String, Object>> propertySet(Object context) {
-      return null;
-    }
-
-    private static String hostname() {
-      try {
-        return InetAddress.getLocalHost().getHostName();
-      } catch (UnknownHostException e) {
-        return "<UNKNOWN>";
-      }
-    }
+    executor.execute(() -> logs.insert(Host.get(), color));
   }
 }
