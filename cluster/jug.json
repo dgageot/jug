@@ -1,0 +1,23 @@
+{
+  "id": "jug",
+  "kind": "ReplicationController",
+  "apiVersion": "v1beta1",
+  "desiredState": {
+    "replicas": 1,
+    "replicaSelector": {"name": "frontend"},
+    "podTemplate": {
+      "desiredState": {
+         "manifest": {
+           "version": "v1beta1",
+           "id": "frontendController",
+           "containers": [{
+             "name": "jug",
+             "image": "dgageot/jug",
+             "ports": [{"containerPort": 8080, "hostPort": 80}]
+           }]
+         }
+       },
+       "labels": {"name": "frontend"}
+      }},
+  "labels": {"name": "frontend"}
+}
