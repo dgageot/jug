@@ -1,0 +1,12 @@
+nginx:
+  image: dgageot/ngxpagespeed
+  ports:
+    - "80:80"
+    - "443:443"
+  volumes:
+    - ./sites-enabled/web:/etc/nginx/sites-enabled/default
+  links:
+    - web:web
+
+web:
+  build: .

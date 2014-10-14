@@ -1,3 +1,3 @@
 #!/bin/bash
 
-~/src/kubernetes /kube/hack/dev-build-and-up.sh
+~/src/kubernetes/hack/dev-build-and-up.sh

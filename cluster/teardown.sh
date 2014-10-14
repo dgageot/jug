@@ -1,3 +1,3 @@
 #!/bin/bash
 
-~/src/kubernetes /kube/cluster/kube-down.sh
+~/src/kubernetes/cluster/kube-down.sh
