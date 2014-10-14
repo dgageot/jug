@@ -1,3 +1,3 @@
 #!/bin/bash
 
-./kube.sh -image dgageot/jug:red -u 5s rollingupdate jug
+./kube.sh -image dgageot/jug:white -u 5s rollingupdate jug
