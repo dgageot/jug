@@ -21,7 +21,7 @@ RUN mvn verify dependency:copy-dependencies -DskipTests \
 ENV PROD_MODE true
 ENV MEMORY 4
 EXPOSE 8080
-CMD ["java", "-DPROD_MODE=${PROD_MODE}", "-Xmx${MEMORY}G", "-jar", "target/jug.jar"]
+CMD java -DPROD_MODE=${PROD_MODE} -Xmx${MEMORY}G -jar target/jug.jar
 
 # Add all sources from docker context
 #
