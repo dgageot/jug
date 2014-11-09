@@ -18,17 +18,21 @@ RUN mvn verify dependency:copy-dependencies -DskipTests \
 
 # Set run environment
 #
-ENV PROD_MODE true
-ENV MEMORY 4
-EXPOSE 8080
-CMD java -DPROD_MODE=${PROD_MODE} -Xmx${MEMORY}G -jar target/jug.jar
+#ENV PROD_MODE true
+#ENV MEMORY 4
+#EXPOSE 8080
+#CMD java -DPROD_MODE=${PROD_MODE} -Xmx${MEMORY}G -jar target/jug.jar
 
 # Add all sources from docker context
 #
 ADD . /home/jug
+ADD Dockerfile.run /home/jug/target/Dockerfile
 
 # Build the app
 # (This command being last, a change in the code triggers a
 # minimal rebuild)
 #
 RUN mvn verify dependency:copy-dependencies -DskipTests
+
+#CMD cat target/Dockerfile
+CMD cd target && tar c .
